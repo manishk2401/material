@@ -1,0 +1,25 @@
+<div class="main-content">
+    <div class="container-fluid login-container">
+
+        <div class="card">
+            <div class="card-header card-header-info text-center">
+                <h3 class="card-title">Login</h3>
+                <p class="card-category">Enter Details for Login</p>
+            </div>
+            <div class="card-body p-3">
+                <form [formGroup]="loginForm">
+                    <mat-form-field class="example-full-width">
+                        <input matInput formControlName="email" type="text" id="editType" placeholder="Email Id">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <input matInput formControlName="pass" type="text" placeholder="Password">
+                    </mat-form-field>
+                    <button mat-raised-button type="submit" (click)="login()"
+                        class="btn btn-info pull-right">Login</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

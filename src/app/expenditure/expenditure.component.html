@@ -1,0 +1,131 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title">Expenditure</h4>
+                <p class="card-category">Add your Expenditure</p>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="expForm">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <mat-form-field class="example-full-width">
+                                <input matInput formControlName="traType" type="text" placeholder="Petrol/Transporter">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field class="example-full-width">
+                                <input matInput formControlName="price" type="number" placeholder="Price">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field class="example-full-width">
+                                <input matInput formControlName="date" placeholder="Date" type="date">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <button mat-raised-button type="submit" (click)="onSubmit()"
+                        class="btn btn-danger pull-right">Add</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+        <!-- <app-expenditure></app-expenditure> -->
+
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title ">Expenditure List</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Pertrol/Transporter
+                            </th>
+                            <th>
+                                Price
+                            </th>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </thead>
+                        <tbody *ngIf="this.expenditures.length===0; else elseBlock">
+                            <tr>
+                                <td>
+                                    <p class="text-center">Todos to display</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <ng-template #elseBlock>
+                            <tbody *ngFor="let exp of expenditures; index as i">
+                                <tr>
+                                    <td>
+                                        {{i + 1}}
+                                    </td>
+                                    <td>
+                                        {{exp.traType}}
+                                    </td>
+                                    <td>
+                                        {{exp.price}}
+                                    </td>
+                                    <td>
+                                        {{exp.date}}
+                                    </td>
+                                    <td>
+                                        <button mat-raised-button (click)="onDelete(exp.uid)"
+                                            class="btn btn-danger btn-sm">
+                                            <i class="material-icons">delete_outline</i></button>
+                                        <button mat-raised-button (click)="htmlInsideModal.open(); editModal(exp.uid)"
+                                            class="btn btn-info btn-sm"><i class="material-icons">edit</i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </ng-template>
+                    </table>
+
+                    <modal #htmlInsideModal id="modal">
+                        <ng-template #modalHeader class="bg-danger">
+                            <h4>Edit</h4>
+                        </ng-template>
+                        <ng-template #modalBody>
+                            <form [formGroup]="expForm" id="editform">
+                                <div class="row">
+
+                                    <div class="col-md-5">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput formControlName="traType" type="text" id="editType"
+                                                [(ngModel)]="curExp[0].traType" placeholder="Petrol/Transporter">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput formControlName="price" type="number" placeholder="Price"
+                                                [(ngModel)]="curExp[0].price">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput formControlName="date" placeholder="Date" type="date"
+                                                [(ngModel)]="curExp[0].date">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <button mat-raised-button type="submit" (click)="onEdit(); htmlInsideModal.close()"
+                                    class="btn btn-primary pull-right">Save</button>
+                                <div class="clearfix"></div>
+                            </form>
+                        </ng-template>
+                    </modal>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

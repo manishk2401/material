@@ -1,0 +1,10 @@
+.card {
+  max-width: 600px;
+}
+
+.login-container {
+  display: flex;
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
+}
